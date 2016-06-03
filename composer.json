@@ -1,6 +1,7 @@
 {
     "name": "jiyis/core-templates",
     "description": "Core Bootstrap templates for InfyOm Laravel Generator",
+    "minimum-stability": "dev",
     "keywords": [
         "laravel",
         "generator",
