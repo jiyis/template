@@ -1,19 +1,30 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="pull-left">Edit $MODEL_NAME$</h1>
+    <div class="content-wrapper">
+        <section class="content-header">
+            {!! Breadcrumbs::render('admin-$MODEL_NAME_PLURAL_CAMEL$-edit') !!}
+        </section>
+        <section class="content">
+            @include('core-templates::common.errors')
+            <div class="row">
+
+                @include('admin._partials.rbac-left-menu')
+
+                <div class="col-sm-9 col-lg-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">编辑[$MODEL_NAME$]</h4>
+                        </div>
+
+                       {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch']) !!}
+
+                        @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+                        {!! Form::close() !!}
+
+                    </div>
+                </div>
             </div>
-        </div>
-
-        @include('core-templates::common.errors')
-
-        <div class="row">
-            {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch']) !!}
-
-            @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.fields')
-
-            {!! Form::close() !!}
-        </div>
+        </section>
 @endsection

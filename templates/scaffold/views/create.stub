@@ -1,19 +1,32 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="pull-left">Create New $MODEL_NAME$</h1>
-        </div>
-    </div>
+    <div class="content-wrapper">
+        <section class="content-header">
+            {!! Breadcrumbs::render('admin-$MODEL_NAME_PLURAL_CAMEL$-create') !!}
+        </section>
+        <section class="content">
+            @include('core-templates::common.errors')
 
-    @include('core-templates::common.errors')
+            <div class="row">
 
-    <div class="row">
-        {!! Form::open(['route' => '$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
+                @include('admin._partials.rbac-left-menu')
 
-            @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.fields')
+                <div class="col-sm-9 col-lg-10">
 
-        {!! Form::close() !!}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">添加[$MODEL_NAME$]</h4>
+                        </div>
+
+                        {!! Form::open(['route' => '$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.store','class' => 'form-horizontal form-bordered']) !!}
+
+                            @include($VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 @endsection

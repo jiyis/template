@@ -2,6 +2,6 @@
 <div class="form-group col-sm-12">
     {!! Form::label('$FIELD_NAME$', '$FIELD_NAME_TITLE$:',['class'=>'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::select('$FIELD_NAME$', $INPUT_ARR$, null, ['class' => 'form-control tooltips']) !!}
+        {!! Form::select('$FIELD_NAME$', $INPUT_ARR$, null, ['class' => 'form-control tooltips select2', 'multiple'=>'multiple']) !!}
     </div>
 </div>
