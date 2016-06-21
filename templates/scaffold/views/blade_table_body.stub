@@ -1,18 +1,29 @@
-<table class="table table-responsive" id="$MODEL_NAME_PLURAL_CAMEL$-table">
+<table class="table table-responsive"  id="$MODEL_NAME_PLURAL_CAMEL$-matches">
     <thead>
+        <th>
+            <span class="ckbox ckbox-primary">
+                <input type="checkbox" id="selectall"/>
+                <label for="selectall"></label>
+            </span>
+        </th>
         $FIELD_HEADERS$
-        <th colspan="3">Action</th>
     </thead>
     <tbody>
     @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
         <tr>
+            <td>
+                <div class="ckbox ckbox-default">
+                    <input type="checkbox" name="id" id="id-{{ $$MODEL_NAME_CAMEL$->id }}"
+                           value="{{ $$MODEL_NAME_CAMEL$->id }}" class="selectall-item"/>
+                    <label for="id-{{ $$MODEL_NAME_CAMEL$->id }}"></label>
+                </div>
+            </td>
             $FIELD_BODY$
             <td>
                 {!! Form::open(['route' => ['$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.destroy', $$MODEL_NAME_CAMEL$->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.show', [$$MODEL_NAME_CAMEL$->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <a class="btn btn-white btn-xs" href="{!! route('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="fa fa-pencil"></i> 编辑</a>
+                    {!! Form::button('<i class="fa fa-trash-o"></i> 删除</a>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('确定要删除吗?')"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

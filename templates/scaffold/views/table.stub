@@ -1,4 +1,4 @@
-<table class="table table-responsive"  id="show-matches">
+<table class="table table-responsive"  id="$MODEL_NAME_PLURAL_CAMEL$-matches">
     <thead>
         <th>
             <span class="ckbox ckbox-primary">
