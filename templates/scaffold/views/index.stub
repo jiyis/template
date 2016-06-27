@@ -8,11 +8,9 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
+            <div class="row container">
 
-               <!--@include('admin._partials.rbac-left-menu')-->
-
-                <div class="col-sm-9 col-lg-10">
+                <div class="col-sm-12 col-lg-12">
 	                <div class="panel panel-default">
 	                    <div class="panel-body">
 	                        <div class="pull-right">
@@ -41,4 +39,25 @@
             </div>
         </section>
     </div>
+@endsection
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(".user-delete").click(function () {
+            Rbac.ajax.delete({
+                confirmTitle: '确定删除用户?',
+                href: $(this).data('href'),
+                successTitle: '用户删除成功'
+            });
+        });
+
+        $(".deleteall").click(function () {
+            Rbac.ajax.deleteAll({
+                confirmTitle: '确定删除选中的用户?',
+                href: $(this).data('href'),
+                successTitle: '用户删除成功'
+            });
+        });
+    </script>
+
 @endsection

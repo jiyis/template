@@ -8,11 +8,9 @@
         <section class="content">
             @include('core-templates::common.errors')
 
-            <div class="row">
+            <div class="row container">
 
-                <!--@include('admin._partials.rbac-left-menu')-->
-
-                <div class="col-sm-9 col-lg-10">
+                <div class="col-sm-12 col-lg-12">
 
                     <div class="panel panel-default">
                         <div class="panel-heading">

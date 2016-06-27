@@ -7,17 +7,15 @@
         </section>
         <section class="content">
             @include('core-templates::common.errors')
-            <div class="row">
+            <div class="row container">
 
-                <!--@include('admin._partials.rbac-left-menu')-->
-
-                <div class="col-sm-9 col-lg-10">
+                <div class="col-sm-12 col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">编辑[$MODEL_NAME$]</h4>
                         </div>
 
-                       {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch']) !!}
+                       {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id],'class' => 'form-horizontal form-bordered', 'method' => 'patch']) !!}
 
                         @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.fields')
 
@@ -27,4 +25,5 @@
                 </div>
             </div>
         </section>
+    </div>
 @endsection

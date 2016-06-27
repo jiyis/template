@@ -1,3 +1,8 @@
+@section('css')
+    @parent
+    <link href="{{ asset('assets/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/dropzone/dropzone.min.css') }}" rel="stylesheet">
+@endsection
 <div class="panel-body panel-body-nopadding">
 	$FIELDS$
 </div>
@@ -9,3 +14,50 @@
     &nbsp;
     <a href="{!! route('$VIEW_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') !!}" class="btn btn-default">取消</a>
 </div>
+@section('javascript')
+    @parent
+    @include('UEditor::head')
+    <script src="{{ asset('assets/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js') }}"></script>
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.min.js') }}"></script>
+    <script type="text/javascript">
+        //初始化日期插件
+        $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii',language: 'zh-CN'});
+        $(".select2").select2();
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].square, input[type="radio"].square').iCheck({
+            checkboxClass: 'icheckbox_square-purple',
+            radioClass: 'iradio_square-purple'
+        });
+        var ueditor = UE.getEditor('ueditor', {
+            initialFrameHeight: 320,
+            autoHeightEnabled: true,
+            autoFloatEnabled: true,
+            autoFloatEnabled : false,
+        });
+        ueditor.ready(function(){
+            //因为Laravel有防csrf防伪造攻击的处理所以加上此行
+            ueditor.execCommand('serverparam','_token','{{ csrf_token() }}');
+        });
+        $("#attachment").dropzone({
+            url: "{!! route('admin.upload.uploadfile') !!}",
+            method: "post",
+            addRemoveLinks: true,
+            dictRemoveLinks: "x",
+            maxFiles: 1,
+            maxFilesize: 5,
+            acceptedFiles: "image/*",
+            sending: function(file, xhr, formData) {
+                formData.append("_token", $('[name=_token').val());
+            },
+            init: function() {
+                this.on("success", function(file,result) {
+                    $('#btitlepicval').val(result.path);
+                });
+                this.on("removedfile", function(file) {
+                    console.log("上传头像失败");
+                });
+            }
+        })
+    </script>
+@endsection
